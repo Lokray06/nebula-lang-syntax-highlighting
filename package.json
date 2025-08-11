@@ -1,7 +1,7 @@
 {
   "publisher": "lokray",
   "name": "nebula-lang",
-  "displayName": "Nebula",
+  "displayName": "Nebula Language Support",
   "description": "Provides syntax highlighting for Nebula (.neb) files",
   "version": "1.0.0",
   "repository": {
