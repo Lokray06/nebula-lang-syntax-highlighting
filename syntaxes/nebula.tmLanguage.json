@@ -218,6 +218,17 @@
               "match": "\\\\."
             }
           ]
+        },
+        {
+          "name": "string.quoted.single.nebula",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.nebula",
+              "match": "\\\\."
+            }
+          ]
         }
       ]
     },
