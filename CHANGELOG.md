@@ -4,7 +4,6 @@ All notable changes to the "nebula-lang" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
-
 - 1.0.0: Initial release
-- 1.0.0: Added single-quoted char literal highlighting
+- 1.0.1: Added single-quoted char literal highlighting
+- 1.0.2: Fixed single-quoted char literal highlighting

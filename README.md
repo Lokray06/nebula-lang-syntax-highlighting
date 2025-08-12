@@ -32,11 +32,11 @@ There are no known issues at this time. If you encounter a bug or have a suggest
 
 ## Release Notes
 
-### 1.0.0
-
-* Initial release of the Nebula Language Support extension.
-
-* Includes syntax highlighting for core language features.
+### 1.0.0: Initial release
+### 1.0.1:
+* Added single-quoted char literal highlighting
+### 1.0.2:
+* Fixed single-quoted char literal highlighting
 
 ## For more information
 

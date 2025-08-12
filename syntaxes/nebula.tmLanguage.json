@@ -249,12 +249,12 @@
       ]
     },
     "identifiers": {
-        "patterns": [
-          {
-            "name": "variable.other.nebula",
-            "match": "\\b[a-z_][a-zA-Z0-9_]*\\b"
-          }
-        ]
+      "patterns": [
+        {
+          "name": "variable.other.nebula",
+          "match": "\\b[a-z_][a-zA-Z0-9_]*\\b"
+        }
+      ]
     }
   }
 }

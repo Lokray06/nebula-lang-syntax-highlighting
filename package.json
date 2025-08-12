@@ -3,7 +3,7 @@
   "name": "nebula-lang",
   "displayName": "Nebula Language Support",
   "description": "Provides syntax highlighting for Nebula (.neb) files",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/Lokray06/nebula-lang-syntax-highlighting.git"
