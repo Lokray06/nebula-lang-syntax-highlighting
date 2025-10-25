@@ -20,19 +20,19 @@
       "include": "#literals"
     },
     {
+      "include": "#strings"
+    },
+    {
       "include": "#operators"
     },
     {
       "include": "#punctuation"
     },
     {
-      "include": "#strings"
-    },
-    {
       "include": "#methods"
     },
     {
-      "include": "#classes"
+      "include": "#classes_and_structs"
     },
     {
       "include": "#identifiers"
@@ -56,19 +56,15 @@
       "patterns": [
         {
           "name": "keyword.control.nebula",
-          "match": "\\b(if|else|for|while|do|switch|case|default|return|throw|try|catch|finally|foreach|in)\\b"
+          "match": "\\b(if|else|for|while|switch|case|default|return|foreach|in|break|continue)\\b"
         },
         {
           "name": "keyword.declaration.nebula",
-          "match": "\\b(class|extends|namespace|native|wrapper|new|var|const|is|import|alias|get|set)\\b"
-        },
-        {
-          "name": "keyword.other.nebula",
-          "match": "\\b(this|super|global|operator|result)\\b"
+          "match": "\\b(class|namespace|native|new|const|is|import|alias|get|set|struct|operator|interface|abstract)\\b"
         },
         {
           "name": "storage.modifier.nebula",
-          "match": "\\b(public|private|static)\\b"
+          "match": "\\b(public|private|static|override)\\b"
         }
       ]
     },
@@ -76,19 +72,31 @@
       "patterns": [
         {
           "name": "support.type.primitive.nebula",
-          "match": "\\b(void|bool|char|char16|char32|byte|short|int|long|float|double|int8|int16|int32|int64|uint8|uint16|uint32|uint64|ubyte|ushort|uint|ulong|string)\\b"
+          "match": "\\b(void|bool|char|byte|sbyte|short|int|long|float|double|int8|int16|int32|int64|uint8|uint16|uint32|uint64|ushort|uint|ulong|string)\\b"
         }
       ]
     },
     "literals": {
       "patterns": [
         {
+          "name": "constant.numeric.hex.nebula",
+          "match": "\\b0[xX][0-9a-fA-F]([0-9a-fA-F]|_(?=[0-9a-fA-F]))*[bBsSlLuU]*\\b"
+        },
+        {
+          "name": "constant.numeric.binary.nebula",
+          "match": "\\b0[bB][01]([01]|_(?=[01]))*[bBsSlLuU]*\\b"
+        },
+        {
           "name": "constant.numeric.float.nebula",
-          "match": "\\b((\\d+\\.\\d*)|(\\d*\\.\\d+))([fFdD])?\\b"
+          "match": "\\b([0-9]([0-9]|_(?=[0-9]))*(\\.[0-9]([0-9]|_(?=[0-9]))*)?|\\.[0-9]([0-9]|_(?=[0-9]))*)(([eE][+-]?[0-9]([0-9]|_(?=[0-9]))*)?)?[fF]\\b"
+        },
+        {
+          "name": "constant.numeric.double.nebula",
+          "match": "\\b([0-9]([0-9]|_(?=[0-9]))*(\\.[0-9]([0-9]|_(?=[0-9]))*)?|\\.[0-9]([0-9]|_(?=[0-9]))*)(([eE][+-]?[0-9]([0-9]|_(?=[0-9]))*)?)?[dD]?\\b"
         },
         {
           "name": "constant.numeric.integer.nebula",
-          "match": "\\b\\d+\\b"
+          "match": "\\b[0-9]([0-9]|_(?=[0-9]))*[bBsSlLuU]*\\b"
         },
         {
           "name": "constant.language.boolean.nebula",
@@ -100,7 +108,7 @@
         },
         {
           "name": "constant.character.nebula",
-          "match": "'(.)'"
+          "match": "'((?:\\\\.)|[^\\\\'])'"
         }
       ]
     },
@@ -108,7 +116,7 @@
       "patterns": [
         {
           "name": "keyword.operator.compound-assignment.nebula",
-          "match": "(\\+\\+|--|\\*\\*=|\\*\\*=)|(<<=|>>=|~=|&=|\\^=|\\|=)|(\\+=|-=|\\*=|/=|%=)"
+          "match": "(\\*\\*=|<<=|>>=|&=|\\^=|\\|=|\\+=|-=|\\*=|/=|%=)"
         },
         {
           "name": "keyword.operator.logical.nebula",
@@ -132,11 +140,7 @@
         },
         {
           "name": "keyword.operator.ternary.nebula",
-          "match": "\\?|:"
-        },
-        {
-          "name": "keyword.operator.other.nebula",
-          "match": "->"
+          "match": "\\?"
         }
       ]
     },
@@ -165,6 +169,10 @@
         {
           "name": "punctuation.separator.dot.nebula",
           "match": "\\."
+        },
+        {
+          "name": "punctuation.separator.colon.nebula",
+          "match": ":"
         }
       ]
     },
@@ -173,38 +181,50 @@
         {
           "name": "string.quoted.interpolated.nebula",
           "begin": "(\\$)\"",
-          "end": "\"",
           "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.interpolated.begin.nebula"
+            "0": {
+              "name": "punctuation.definition.string.begin.nebula"
             }
           },
+          "end": "\"",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.interpolated.end.nebula"
+              "name": "punctuation.definition.string.end.nebula"
             }
           },
           "patterns": [
             {
-              "name": "variable.other.interpolated.nebula",
-              "begin": "\\{",
-              "end": "\\}",
+              "name": "constant.character.escape.nebula",
+              "match": "\\\\."
+            },
+            {
+              "name": "constant.character.escape.nebula",
+              "match": "\\{\\{|\\}\\}"
+            },
+            {
+              "name": "meta.interpolation.nebula",
+              "begin": "(?<!\\{)\\{(?!\\{)",
               "beginCaptures": {
                 "0": {
                   "name": "punctuation.definition.interpolation.begin.nebula"
                 }
               },
+              "end": "(?<!\\})\\}(?!\\})",
               "endCaptures": {
                 "0": {
                   "name": "punctuation.definition.interpolation.end.nebula"
                 }
               },
+              "contentName": "source.nebula",
               "patterns": [
                 {
-                  "name": "variable.parameter.nebula",
-                  "match": "[a-zA-Z_][a-zA-Z0-9_]*"
+                  "include": "$self"
                 }
               ]
+            },
+            {
+              "match": "[^\\\\\"{}]+",
+              "name": "string.quoted.interpolated.content.nebula"
             }
           ]
         },
@@ -212,17 +232,6 @@
           "name": "string.quoted.double.nebula",
           "begin": "\"",
           "end": "\"",
-          "patterns": [
-            {
-              "name": "constant.character.escape.nebula",
-              "match": "\\\\."
-            }
-          ]
-        },
-        {
-          "name": "string.quoted.single.nebula",
-          "begin": "'",
-          "end": "'",
           "patterns": [
             {
               "name": "constant.character.escape.nebula",
@@ -240,10 +249,18 @@
         }
       ]
     },
-    "classes": {
+    "classes_and_structs": {
       "patterns": [
         {
           "name": "entity.name.type.class.nebula",
+          "match": "(?<=\\bclass\\s+)([a-zA-Z_][a-zA-Z0-9_]*)(?=\\s*\\{)"
+        },
+        {
+          "name": "entity.name.type.struct.nebula",
+          "match": "(?<=\\bstruct\\s+)([a-zA-Z_][a-zA-Z0-9_]*)"
+        },
+        {
+          "name": "entity.name.type.nebula",
           "match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
         }
       ]
